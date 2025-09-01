@@ -123,3 +123,109 @@ Make sure you are on the correct branch before committing.
 
 Avoid committing sensitive files like .env by using .gitignore.
 >>>>>>> 3f8968e54c295c7d94009aa69c084f3f8263f520
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Check Branches
+git branch -a
+
+
+main – the production-ready branch.
+
+developing – the active development branch.
+
+🔹 3. Switch Branches
+git checkout main      # Switch to main branch
+git checkout developing # Switch to developing branch
+
+🔹 4. Pull Latest Changes Before Work
+
+Always pull remote changes before starting:
+
+git pull origin main          # Pull updates from main
+git pull origin developing    # Pull updates from developing
+
+
+Resolving conflicts may be required if there are overlapping changes.
+
+🔹 5. Work on Your Changes
+
+Make code changes or add new files.
+
+Check status:
+
+git status
+
+🔹 6. Stage Changes
+git add .
+
+
+Or stage specific files:
+
+git add path/to/file.js
+
+🔹 7. Commit Your Changes
+git commit -m "Describe your change clearly"
+
+🔹 8. Push Changes
+Main Branch
+git checkout main
+git pull origin main --allow-unrelated-histories
+git push -u origin main
+
+Developing Branch
+git checkout developing
+git pull origin developing --allow-unrelated-histories
+git push -u origin developing
+
+
+Tip: Always pull first to sync remote changes.
+
+🔹 9. Creating a New Feature Branch (Optional)
+git checkout developing
+git checkout -b feature/my-new-feature
+
+
+Work on your feature.
+
+Merge back into developing when ready:
+
+git checkout developing
+git merge feature/my-new-feature
+git push origin developing
+
+🔹 10. Resolving Merge Conflicts
+
+Git will mark conflicts in files.
+
+Open files and fix conflicts.
+
+Stage resolved files:
+
+git add .
+git commit -m "Resolved merge conflicts"
+
+
+Push again.
+
+⚠️ Notes for the Team
+
+Always pull before pushing.
+
+Avoid force pushes unless necessary.
+
+Use developing for ongoing development and main for stable code.
+
+Keep commit messages clear and descriptive.
