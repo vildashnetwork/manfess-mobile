@@ -26,7 +26,7 @@ export default function DashboardScreen({ navigation }) {
       <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
       
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.greeting}>Welcome, {teacher?.email}</Text>
+        <Text style={styles.greeting}>Welcome, {teacher?.Name}</Text>
         <Animatable.View animation="fadeInUp" style={styles.cardsContainer}>
           {cards.map((card, idx) => (
             <TouchableOpacity

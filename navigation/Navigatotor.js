@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Ionicons } from '@expo/vector-icons';
+
 import DashboardScreen from '../screens/DashboardScreen';
 import MarksScreen from '../screens/MarksScreen';
 import TimetableScreen from '../screens/TimetableScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import LoginScreen from '../screens/LoginScreen';
-import { Ionicons } from '@expo/vector-icons';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function AppTabs() {
-  const insets = useSafeAreaInsets(); // ✅ safe area insets for bottom
+  const insets = useSafeAreaInsets();
 
   return (
     <Tab.Navigator
@@ -21,7 +23,7 @@ function AppTabs() {
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#fff',
-          height: 70 + insets.bottom, // add safe area padding
+          height: 70 + insets.bottom,
           paddingBottom: 10 + insets.bottom,
           paddingTop: 10,
           borderTopWidth: 0,
@@ -65,10 +67,28 @@ function AppTabs() {
 }
 
 export default function AppNavigator() {
+  const [isTeacher, setIsTeacher] = useState(null); // null = loading
+
+  useEffect(() => {
+    const loadTeacher = async () => {
+      const data = await AsyncStorage.getItem('teacher');
+      setIsTeacher(!!data); // true if teacher exists
+    };
+    loadTeacher();
+  }, []);
+
+  // Prevent flicker during AsyncStorage load
+  if (isTeacher === null) {
+    return null; // or a SplashScreen
+  }
+
   return (
-    <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown:false }} />
-      <Stack.Screen name="Home" component={AppTabs} options={{ headerShown:false }} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {isTeacher ? (
+        <Stack.Screen name="Home" component={AppTabs} />
+      ) : (
+        <Stack.Screen name="Login" component={LoginScreen} />
+      )}
     </Stack.Navigator>
   );
 }
