@@ -46,7 +46,7 @@ export default function DashboardScreen({ navigation }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f0f0f0ff',
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, // <-- fix for Android
   },
   container: {
