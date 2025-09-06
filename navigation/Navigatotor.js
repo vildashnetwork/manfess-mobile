@@ -10,9 +10,20 @@ import MarksScreen from '../screens/MarksScreen';
 import TimetableScreen from '../screens/TimetableScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import LoginScreen from '../screens/LoginScreen';
+import MockOlevel from '../screens/MockOlevel';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+// ✅ Create a Stack for Dashboard
+function DashboardStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="DashboardMain" component={DashboardScreen} />
+      <Stack.Screen name="MockOlevel" component={MockOlevel} />
+    </Stack.Navigator>
+  );
+}
 
 function AppTabs() {
   const insets = useSafeAreaInsets();
@@ -36,7 +47,7 @@ function AppTabs() {
     >
       <Tab.Screen 
         name="Dashboard" 
-        component={DashboardScreen} 
+        component={DashboardStack} // use the stack here
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" color={color} size={size} />
         }}
@@ -77,10 +88,7 @@ export default function AppNavigator() {
     loadTeacher();
   }, []);
 
-  // Prevent flicker during AsyncStorage load
-  if (isTeacher === null) {
-    return null; // or a SplashScreen
-  }
+  if (isTeacher === null) return null; // optional splash
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
