@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 
-export default function MockOlevel() {
+export default function PremockOlevel() {
   const [marks, setMarks] = useState({});
   const [grades, setGrades] = useState({});
   const [students, setStudents] = useState([]);
@@ -96,7 +96,7 @@ export default function MockOlevel() {
       return;
     }
 
-    let existingHistory = await AsyncStorage.getItem('mockResultsHistory');
+    let existingHistory = await AsyncStorage.getItem('mockResultsHistoryp');
     existingHistory = existingHistory ? JSON.parse(existingHistory) : [];
 
     const resultsToSave = students.map(student => {
@@ -126,8 +126,8 @@ export default function MockOlevel() {
     });
 
     try {
-      await AsyncStorage.setItem('mockResultsHistory', JSON.stringify(existingHistory));
-      await AsyncStorage.setItem('mockResults', JSON.stringify(existingHistory));
+      await AsyncStorage.setItem('mockResultsHistoryp', JSON.stringify(existingHistory));
+      await AsyncStorage.setItem('mockResultsp', JSON.stringify(existingHistory));
       Alert.alert('Saved Offline', 'Results updated locally.');
       DevSettings.reload()
       console.log('Saved results:', existingHistory);
@@ -141,7 +141,7 @@ export default function MockOlevel() {
   const handleSaveOnline = async () => {
     try {
       setLoading(true);
-      const savedResults = await AsyncStorage.getItem('mockResults');
+      const savedResults = await AsyncStorage.getItem('mockResultsp');
       const resultsToSend = savedResults ? JSON.parse(savedResults) : [];
 
       if (resultsToSend.length === 0) {
@@ -149,12 +149,12 @@ export default function MockOlevel() {
         return;
       }
 
-      const response = await axios.post('https://manfess-backend.onrender.com/api/students/olevelmock', resultsToSend);
+      const response = await axios.post('https://manfess-backend.onrender.com/api/students/olevelpremock', resultsToSend);
 
       Alert.alert('Success', `Results pushed online.\nInserted: ${response.data.insertedCount}, Updated: ${response.data.updatedCount}`);
-      await AsyncStorage.removeItem('mockResults');
-     await AsyncStorage.removeItem('mockResultsHistory');
-      await AsyncStorage.removeItem('marks');
+      await AsyncStorage.removeItem('mockResultsp');
+      await AsyncStorage.removeItem('mockResultsHistoryp');
+      await AsyncStorage.removeItem('marksp');
       DevSettings.reload();
 
     } catch (error) {

@@ -61,14 +61,16 @@ export default function DashboardScreen({ navigation }) {
   ];
 
   const dashboardItems = [
-    { title: 'Filled Marks', screen: 'Marks', color: '#4CAF50', animation: 'fadeInLeft', delay: 100, icon: '📝' },
+    { title: 'Filled Mock Marks', screen: 'Marks', color: '#4CAF50', animation: 'fadeInLeft', delay: 100, icon: '📝' },
+     { title: 'Filled Pre Mock Marks', screen: 'FilledPremock', color: '#256827ff', animation: 'fadeInLeft', delay: 100, icon: '📝' },
+    
     { title: 'View Timetable', screen: 'Timetable', color: '#03A9F4', animation: 'fadeInRight', delay: 200, icon: '🗓️' },
-    { title: 'Take Attendance', screen: 'Attendance', color: '#FF5722', animation: 'fadeInLeft', delay: 300, icon: '✅' },
+    { title: 'Mock Alevel', screen: 'MockAlevel', color: '#FF5722', animation: 'fadeInLeft', delay: 300, icon: '📚' },
     { title: 'Mock Olevel', screen: 'MockOlevel', color: '#FFC107', animation: 'fadeInRight', delay: 400, icon: '📚' },
-    { title: 'Announcements', screen: 'Announcements', color: '#2196F3', animation: 'fadeInLeft', delay: 500, icon: '📢' },
-    { title: 'Resources', screen: 'Resources', color: '#9C27B0', animation: 'fadeInRight', delay: 600, icon: '🔗' },
+    { title: 'Pre Mock Olevel', screen: 'PremockOlevelclass', color: '#2196F3', animation: 'fadeInLeft', delay: 500, icon: '📚' },
+    { title: 'Pre Mock Alevel', screen: 'PremockAlevel', color: '#9C27B0', animation: 'fadeInRight', delay: 600, icon: '📚' },
     { title: 'Profile', screen: 'Profile', color: '#FF9800', animation: 'fadeInLeft', delay: 700, icon: '👤' },
-    { title: 'Logout', screen: 'Login', color: '#F44336', animation: 'fadeInRight', delay: 800, icon: '🚪' },
+
   ];
 
   const filteredItems = dashboardItems.filter(item =>
@@ -149,6 +151,7 @@ export default function DashboardScreen({ navigation }) {
             placeholder="Search features..."
             value={searchQuery}
             onChangeText={setSearchQuery}
+            disabled
           />
         </Animatable.View>
         

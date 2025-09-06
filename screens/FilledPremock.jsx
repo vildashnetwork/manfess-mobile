@@ -9,17 +9,17 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function MarksScreen() {
+export default function FilledPremock() {
   const [historyOlevel, setHistoryOlevel] = useState([]);
   const [historyAlevel, setHistoryAlevel] = useState([]);
 
   useEffect(() => {
     const loadHistory = async () => {
       try {
-        const storedOlevel = await AsyncStorage.getItem("mockResultsHistory");
+        const storedOlevel = await AsyncStorage.getItem("mockResultsHistoryalevelpremock");
         if (storedOlevel) setHistoryOlevel(JSON.parse(storedOlevel));
 
-        const storedAlevel = await AsyncStorage.getItem("mockResultsHistoryalevel");
+        const storedAlevel = await AsyncStorage.getItem("mockResultsHistoryp");
         if (storedAlevel) setHistoryAlevel(JSON.parse(storedAlevel));
       } catch (error) {
         console.error("Error loading history:", error);
@@ -95,8 +95,8 @@ export default function MarksScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      {renderHistorySection("📚 O-Level Mock History", historyOlevel, "olevel")}
-      {renderHistorySection("📚 A-Level Mock History", historyAlevel, "alevel")}
+      {renderHistorySection("📚 A-Level Pre Mock History", historyOlevel, "olevel")}
+      {renderHistorySection("📚 O-Level Pre Mock History", historyAlevel, "alevel")}
     </ScrollView>
   );
 }
