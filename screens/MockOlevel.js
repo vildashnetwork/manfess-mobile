@@ -40,7 +40,7 @@ export default function MockOlevel() {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
    <View style={styles.pickerContainer}>
-      <Text style={styles.label}>Select a language</Text>
+      <Text style={styles.label}>Select a Subject</Text>
       <View style={styles.pickerWrapper}>
         <Picker
           selectedValue={selectedValue}
@@ -48,16 +48,17 @@ export default function MockOlevel() {
           style={styles.picker}
           dropdownIconColor="#4CAF50"
         >
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="javascript" />
-          <Picker.Item label="Python" value="python" />
+          <Picker.Item label="Maths" value="Maths" />
+          <Picker.Item label="Physics" value="Physics" />
+          <Picker.Item label="Chemistry" value="Chemistry" />
         </Picker>
       </View>
-      <Text style={styles.selectedText}>Selected: {selectedValue}</Text>
+      <Text style={styles.selectedText}>Subject Title: {selectedValue}</Text>
+       <Text style={styles.selectedText}>Subject Code: 0590</Text>
     </View>
 
 
-        <Text style={styles.title}>Enter Marks for mock</Text>
+        <Text style={styles.title}> Marks For Mock Olevel</Text>
         
         {students.map(student => (
           <View key={student.id} style={styles.studentRow}>
