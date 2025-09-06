@@ -98,7 +98,7 @@ Push your branch and make a Pull Request on GitHub for review.
 * git add .
 
 # Commit with a message
-* git commit -m "Update index.js and .gitignore"
+* git commit -m "Update pleasereadthis.Md and .gitignore"
 
 🔹 Push Changes to GitHub
  # Push to the remote 'main' branch
