@@ -61,7 +61,7 @@ export default function DashboardScreen({ navigation }) {
   ];
 
   const dashboardItems = [
-    { title: 'Enter Marks', screen: 'Marks', color: '#4CAF50', animation: 'fadeInLeft', delay: 100, icon: '📝' },
+    { title: 'Filled Marks', screen: 'Marks', color: '#4CAF50', animation: 'fadeInLeft', delay: 100, icon: '📝' },
     { title: 'View Timetable', screen: 'Timetable', color: '#03A9F4', animation: 'fadeInRight', delay: 200, icon: '🗓️' },
     { title: 'Take Attendance', screen: 'Attendance', color: '#FF5722', animation: 'fadeInLeft', delay: 300, icon: '✅' },
     { title: 'Mock Olevel', screen: 'MockOlevel', color: '#FFC107', animation: 'fadeInRight', delay: 400, icon: '📚' },
