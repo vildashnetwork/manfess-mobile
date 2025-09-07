@@ -16,10 +16,10 @@ export default function FilledPremock() {
   useEffect(() => {
     const loadHistory = async () => {
       try {
-        const storedOlevel = await AsyncStorage.getItem("mockResultsHistoryalevelpremock");
+        const storedOlevel = await AsyncStorage.getItem("offline_results_history_alevel_premock");
         if (storedOlevel) setHistoryOlevel(JSON.parse(storedOlevel));
 
-        const storedAlevel = await AsyncStorage.getItem("mockResultsHistoryp");
+        const storedAlevel = await AsyncStorage.getItem("offline_results_history_premock");
         if (storedAlevel) setHistoryAlevel(JSON.parse(storedAlevel));
       } catch (error) {
         console.error("Error loading history:", error);
@@ -32,10 +32,10 @@ export default function FilledPremock() {
   const clearHistory = async (level) => {
     try {
       if (level === "olevel") {
-        await AsyncStorage.removeItem("mockResultsHistory");
+        await AsyncStorage.removeItem("offline_results_history_premock");
         setHistoryOlevel([]);
       } else {
-        await AsyncStorage.removeItem("mockResultsHistoryalevel");
+        await AsyncStorage.removeItem("offline_results_history_alevel_premock");
         setHistoryAlevel([]);
       }
       Alert.alert("Cleared", `All ${level.toUpperCase()} history has been deleted.`);

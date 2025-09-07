@@ -9,10 +9,13 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DevSettings } from 'react-native';
+import axios from 'axios';
 
 export default function ProfileScreen() {
-  const [teacher, setTeacher] = useState({ number: '', password: '' });
+  const [teacher, setTeacher] = useState({ Number: '', Name: '' });
+  const [loading, setLoading] = useState(false);
 
+  // Load teacher data from AsyncStorage on mount
   useEffect(() => {
     const loadTeacher = async () => {
       try {
@@ -25,15 +28,37 @@ export default function ProfileScreen() {
     loadTeacher();
   }, []);
 
+  // Save updated teacher profile
   const handleSave = async () => {
+    if (!teacher.Number || !teacher.Name) {
+      return Alert.alert('Error', 'Please fill in all fields.');
+    }
+
     try {
-      await AsyncStorage.setItem('teacher', JSON.stringify(teacher));
-      Alert.alert('Success', 'Profile updated!');
+      setLoading(true);
+      const res = await axios.post(
+        "https://manfess-backend.onrender.com/api/teachers/updateteacher",
+        {
+          Number: teacher.Number,
+           Name: teacher.Name,
+           localid: teacher.localid
+        }
+      );
+
+      if (res.data) {
+        await AsyncStorage.setItem('teacher', JSON.stringify(teacher));
+        Alert.alert('Success', 'Profile updated!');
+      }
+
     } catch (error) {
+      console.error('Error saving profile:', error);
       Alert.alert('Error', 'Could not save profile.');
+    } finally {
+      setLoading(false);
     }
   };
 
+  // Logout and clear AsyncStorage
   const handleLogout = async () => {
     await AsyncStorage.removeItem('teacher');
     DevSettings.reload(); // 🚀 restart app in dev
@@ -47,7 +72,7 @@ export default function ProfileScreen() {
         {/* Avatar */}
         <View style={styles.profile}>
           <Text style={styles.avatarText}>
-            {teacher.number ? teacher.number[0].toUpperCase() : 'M'}
+            {teacher.Name ? teacher.Name.charAt(0).toUpperCase() : 'M'}
           </Text>
         </View>
 
@@ -55,26 +80,25 @@ export default function ProfileScreen() {
         <Text style={styles.label}>Number</Text>
         <TextInput
           style={styles.input}
-          value={teacher.number}
+          value={teacher?.Number}
           placeholder="Enter your number"
           placeholderTextColor="#aaa"
-          onChangeText={number => setTeacher({ ...teacher, number })}
+          onChangeText={text => setTeacher({ ...teacher, Number: text })}
         />
 
         {/* Password / Name */}
         <Text style={styles.label}>Password / Name</Text>
         <TextInput
           style={styles.input}
-          value={teacher.password}
-          placeholder="Enter password or name"
+          value={teacher?.Name}
+          placeholder="Enter Name*"
           placeholderTextColor="#aaa"
-          secureTextEntry
-          onChangeText={password => setTeacher({ ...teacher, password })}
+          onChangeText={text => setTeacher({ ...teacher, Name: text })}
         />
 
         {/* Save Button */}
-        <TouchableOpacity style={styles.button} onPress={handleSave}>
-          <Text style={styles.buttonText}>Save</Text>
+        <TouchableOpacity style={styles.button} onPress={handleSave} disabled={loading}>
+          <Text style={styles.buttonText}>{loading ? "Saving..." : "Save"}</Text>
         </TouchableOpacity>
 
         {/* Logout Button */}

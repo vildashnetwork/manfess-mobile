@@ -15,6 +15,8 @@ import MockAlevel from '../screens/MockAlevel';
 import PremockAlevel from '../screens/PremockAlevel';
 import PremockOlevel from "../screens/PremockOlevel";
 import FilledPremock from '../screens/FilledPremock';
+import First_Cycle from '../screens/First_Cycle';
+import TerminalExams from '../screens/TerminalExams';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -28,6 +30,8 @@ function DashboardStack() {
       <Stack.Screen name="PremockAlevel" component={PremockAlevel} />
       <Stack.Screen name="PremockOlevelclass" component={PremockOlevel} />
       <Stack.Screen name="FilledPremock" component={FilledPremock} />
+      <Stack.Screen name="First_Cycle" component={First_Cycle} />
+      <Stack.Screen name="TerminalExams" component={TerminalExams} />
     </Stack.Navigator>
   );
 }

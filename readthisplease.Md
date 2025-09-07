@@ -146,3 +146,5 @@ git branch -d feature-branch
 git add .
 git commit -m "Updated index.js and .gitignore"
 git push origin main
+
+npx expo start --go
