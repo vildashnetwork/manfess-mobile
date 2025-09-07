@@ -356,6 +356,11 @@ const handleSaveOnline = async () => {
             <Picker.Item label="-- Select Sequence --" value="" />
             <Picker.Item label="First Sequence" value="First Sequence" />
             <Picker.Item label="Second Sequence" value="Second Sequence" />
+            <Picker.Item label="Third Sequence" value="Third Sequence" />
+            <Picker.Item label="Fourth Sequence" value="Fourth Sequence" />
+            <Picker.Item label="Fifth Sequence" value="Fifth Sequence" />
+            <Picker.Item label="Sixth Sequence" value="Sixth Sequence" />
+          
           </Picker>
         </View>
 
