@@ -4,20 +4,20 @@
     "slug": "manfess-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/public.jpg",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/public.jpg",
-      "resizeMode": "contain",
-      "backgroundColor": "#28a745"
+      "backgroundColor": "#28a745",
+      "resizeMode": "cover",
+      "image": "./assets/logo.png"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/public.jpg",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#28a745"
       },
       "edgeToEdgeEnabled": true,

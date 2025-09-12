@@ -6,12 +6,26 @@ import {
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
+  Linking
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import NetInfo from "@react-native-community/netinfo";
 
 export default function TimetableScreen() {
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [timetable, setTimetable] = useState([]);
   const [loading, setLoading] = useState(true);
   const [teacherName, setTeacherName] = useState("");
@@ -95,7 +109,12 @@ export default function TimetableScreen() {
       </View>
     );
   }
-
+  const openWebsite = () => {
+    const url = `https://manfess-backend.onrender.com/download/${teacherName}`; 
+    Linking.openURL(url).catch((err) =>
+      console.error("Failed to open URL:", err)
+    );
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🏆 {teacherName}'s Timetable 🏆</Text>
@@ -103,6 +122,13 @@ export default function TimetableScreen() {
       <TouchableOpacity style={styles.refreshButton} onPress={handleRefresh}>
         <Text style={styles.refreshText}>{refreshing ? "Refreshing..." : "Refresh Timetable"}</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+  style={[styles.refreshButton, { backgroundColor: "#256627", marginTop: 10 }]}
+onPress={openWebsite}
+>
+  <Text style={styles.refreshText}>Download PDF</Text>
+</TouchableOpacity>
+
 
       <ScrollView horizontal>
         <ScrollView>

@@ -7,7 +7,7 @@
 // import { Picker } from '@react-native-picker/picker';
 // import axios from 'axios';
 // import NetInfo from '@react-native-community/netinfo';
-// import { DevSettings } from 'react-native';
+
 // export default function PremockAlevel() {
 //   const [marks, setMarks] = useState({});
 //   const [grades, setGrades] = useState({});
@@ -127,7 +127,7 @@
 //       await AsyncStorage.setItem('mockResultsHistoryalevelpremock', JSON.stringify(updatedHistory));
 //       await AsyncStorage.setItem('marksalevelpremock', JSON.stringify(marks));
 //       Alert.alert('Saved Offline', 'Results saved/updated locally.');
-//       DevSettings.reload()
+
 //       console.log('Offline History:', updatedHistory);
 //     } catch (error) {
 //       console.error('Error saving results locally:', error);
@@ -158,7 +158,7 @@
 //       await AsyncStorage.removeItem('mockResultsHistoryalevelpremock');
 //       await AsyncStorage.removeItem('marksalevelpremock');
 //       await AsyncStorage.removeItem('mockResultsalevelpremock');
-//         DevSettings.reload();
+
 //     } catch (error) {
 //       console.error('Error sending results online:', error);
 //       Alert.alert('Error', 'Failed to push results online.');
@@ -278,7 +278,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import NetInfo from '@react-native-community/netinfo';
-import { DevSettings } from 'react-native';
+
 
 export default function PremockAlevel() {
   const [marks, setMarks] = useState({});
@@ -491,7 +491,7 @@ export default function PremockAlevel() {
 
       Alert.alert('Saved Offline', `Saved ${created.length} record(s) locally.`);
       console.log('PremockAlevel saved offline entries:', created.length);
-       DevSettings.reload()
+     
     } catch (err) {
       console.error('PremockAlevel saveOffline error', err);
       Alert.alert('Error', 'Failed to save results locally.');
@@ -529,7 +529,7 @@ export default function PremockAlevel() {
 
       safeSetProgress(100);
       setTimeout(() => { if (mountedRef.current) { setLoading(false); safeSetProgress(0); } }, 700);
-       DevSettings.reload()
+      
     } catch (err) {
       const info = extractAxiosErrorInfo(err);
       console.error('PremockAlevel push error', info);
@@ -562,11 +562,11 @@ export default function PremockAlevel() {
       <Text style={{ marginTop: 8, fontWeight: '700' }}>Last error</Text>
       <Text style={{ color: '#b71c1c' }}>{lastError ?? '(none)'}</Text>
 
-      <Text style={{ marginTop: 8, fontWeight: '700' }}>Raw preview</Text>
-      <Text numberOfLines={6}>{rawPreview ? JSON.stringify(rawPreview, null, 2) : '(none)'}</Text>
     </View>
   );
 
+      // <Text style={{ marginTop: 8, fontWeight: '700' }}>Raw preview</Text>
+      // <Text numberOfLines={6}>{rawPreview ? JSON.stringify(rawPreview, null, 2) : '(none)'}</Text>
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
@@ -593,12 +593,13 @@ export default function PremockAlevel() {
               style={styles.picker}
               dropdownIconColor="#4CAF50"
             >
-              <Picker.Item label="-- Select Subject --" value="" />
+              <Picker.Item label="-- Select Subject --" value=""   />
               {allSubjects.map(sub => (
                 <Picker.Item
                   key={`${sub.subjectCode}-${sub.Subject_Id ?? ''}`}
                   label={`${sub.subjectTitle} ${sub.level ? `(${sub.level})` : ''}`}
                   value={String(sub.subjectCode)}
+               
                 />
               ))}
             </Picker>
@@ -648,7 +649,8 @@ export default function PremockAlevel() {
 
 const styles = StyleSheet.create({
   scrollContainer: { padding: 16, backgroundColor: '#f6f6f6', paddingBottom: 120 },
-  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 },
+  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8,
+     marginTop: 50 },
   headerTitle: { fontSize: 18, fontWeight: '700' },
   debugBox: { backgroundColor: '#fff', padding: 10, borderRadius: 8, marginBottom: 12 },
   progressContainer: { height: 28, backgroundColor: '#eee', borderRadius: 14, overflow: 'hidden', marginVertical: 8 },
@@ -657,11 +659,11 @@ const styles = StyleSheet.create({
   pickerContainer: { marginVertical: 12, padding: 12, backgroundColor: '#fff', borderRadius: 12, elevation: 3 },
   label: { fontSize: 14, fontWeight: '600', marginBottom: 8, color: '#333' },
   pickerWrapper: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, overflow: 'hidden' },
-  picker: { height: 46, width: '100%', color: '#333' },
+  picker: { height: 56, width: '100%', color: '#333' },
   title: { fontSize: 16, fontWeight: '700', marginTop: 12, marginBottom: 10, color: '#222' },
   studentRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 10, backgroundColor: '#fff', padding: 10, borderRadius: 10 },
   studentName: { flex: 1, fontSize: 15, fontWeight: '600' },
-  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ddd', borderRadius: 8, backgroundColor: '#fafafa', marginRight: 10, textAlign: 'center' },
+  input: { width: 90, padding: 8, borderWidth: 1,color: "#333", borderColor: '#ddd', borderRadius: 8, backgroundColor: '#fafafa', marginRight: 10, textAlign: 'center' },
   gradeText: { width: 48, textAlign: 'center', fontSize: 14, fontWeight: '700', color: '#1e6921' },
   button: { padding: 12, borderRadius: 10, marginVertical: 8 },
   buttonText: { color: '#fff', fontWeight: '700', textAlign: 'center' },

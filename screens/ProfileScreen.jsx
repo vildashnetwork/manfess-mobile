@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DevSettings } from 'react-native';
 import axios from 'axios';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({onLogout}) {
   const [teacher, setTeacher] = useState({ Number: '', Name: '' });
   const [loading, setLoading] = useState(false);
 
@@ -61,7 +61,7 @@ export default function ProfileScreen() {
   // Logout and clear AsyncStorage
   const handleLogout = async () => {
     await AsyncStorage.removeItem('teacher');
-    DevSettings.reload(); // 🚀 restart app in dev
+   if (onLogout) onLogout();
   };
 
   return (

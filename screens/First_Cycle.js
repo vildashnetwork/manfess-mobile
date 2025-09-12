@@ -405,11 +405,11 @@ const styles = StyleSheet.create({
   pickerContainer: { marginVertical: 12, padding: 12, backgroundColor: '#fff', borderRadius: 12, elevation: 3 },
   label: { fontSize: 14, fontWeight: '600', marginBottom: 6, color: '#333' },
   pickerWrapper: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, overflow: 'hidden' },
-  picker: { height: 48, width: '100%' },
+  picker: { height: 56, width: '100%' },
   title: { fontSize: 20, fontWeight: '700', marginBottom: 12 },
   studentRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12, backgroundColor: '#fff', padding: 12, borderRadius: 10, elevation: 2 },
   studentName: { flex: 1, fontSize: 15, fontWeight: '600' },
-  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ccc', borderRadius: 8, marginRight: 8, textAlign: 'center' },
+  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ccc',color: "#333", borderRadius: 8, marginRight: 8, textAlign: 'center' },
   gradeText: { width: 48, textAlign: 'center', fontWeight: '700', color: '#4CAF50' },
   button: { padding: 12, borderRadius: 10, marginTop: 10 },
   buttonText: { color: '#fff', fontWeight: '700', textAlign: 'center' }

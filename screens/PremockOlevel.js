@@ -279,7 +279,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import NetInfo from '@react-native-community/netinfo';
-import { DevSettings } from 'react-native';
+
 
 export default function PremockOlevel() {
   const [marks, setMarks] = useState({});
@@ -491,7 +491,7 @@ export default function PremockOlevel() {
       await AsyncStorage.setItem(KEY_MARKS, JSON.stringify(marks));
 
       Alert.alert('Saved Offline', `Saved ${newRecords.length} record(s) locally.`);
-       DevSettings.reload()
+       
     } catch (err) {
       console.error('Premock saveOffline error', err);
       Alert.alert('Error', 'Failed to save results locally.');
@@ -528,7 +528,7 @@ export default function PremockOlevel() {
       setGrades({});
       safeSetProgress(100);
       setTimeout(() => { if (mountedRef.current) { setLoading(false); safeSetProgress(0); } }, 700);
-       DevSettings.reload()
+  
     } catch (err) {
       const info = extractAxiosErrorInfo(err);
       console.error('Premock push error', info);
@@ -556,11 +556,12 @@ export default function PremockOlevel() {
 
       <Text style={{ marginTop: 8, fontWeight: '700' }}>Last error</Text>
       <Text style={{ color: '#b71c1c' }}>{lastError ?? '(none)'}</Text>
-      <Text style={{ marginTop: 8, fontWeight: '700' }}>Raw preview</Text>
-      <Text numberOfLines={6}>{rawResponsePreview ? JSON.stringify(rawResponsePreview, null, 2) : '(none)'}</Text>
+     
     </View>
   );
-
+//  <Text style={{ marginTop: 8, fontWeight: '700' }}>Raw preview</Text>
+//       <Text numberOfLines={6}>{rawResponsePreview ? JSON.stringify(rawResponsePreview, null, 2) : '(none)'}</Text>
+   
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
@@ -655,12 +656,12 @@ const styles = StyleSheet.create({
   pickerContainer: { marginVertical: 12, padding: 12, backgroundColor: '#fff', borderRadius: 12, elevation: 3 },
   label: { fontSize: 14, fontWeight: '600', marginBottom: 8, color: '#333' },
   pickerWrapper: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, overflow: 'hidden' },
-  picker: { height: 44 },
+  picker: { height: 56 },
   selectedText: { marginTop: 6, fontSize: 13, color: '#555' },
   title: { fontSize: 16, fontWeight: '700', marginTop: 12, marginBottom: 10 },
   studentRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 10, backgroundColor: '#fff', padding: 10, borderRadius: 10 },
   studentName: { flex: 1, fontSize: 15, fontWeight: '600' },
-  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ddd', borderRadius: 8, backgroundColor: '#fafafa', marginRight: 10, textAlign: 'center' },
+  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ddd', color: "#333", borderRadius: 8, backgroundColor: '#fafafa', marginRight: 10, textAlign: 'center' },
   gradeText: { width: 48, textAlign: 'center', fontSize: 14, fontWeight: '700', color: '#4CAF50' },
   button: { padding: 12, borderRadius: 10, marginVertical: 8 },
   buttonText: { color: '#fff', fontWeight: '700', textAlign: 'center' },

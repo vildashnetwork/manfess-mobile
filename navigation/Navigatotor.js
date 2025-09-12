@@ -36,7 +36,93 @@ function DashboardStack() {
   );
 }
 
-function AppTabs() {
+// function AppTabs() {
+//   const insets = useSafeAreaInsets();
+
+//   return (
+//     <Tab.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//         tabBarStyle: {
+//           backgroundColor: '#fff',
+//           height: 70 + insets.bottom,
+//           paddingBottom: 10 + insets.bottom,
+//           paddingTop: 10,
+//           borderTopWidth: 0,
+//           elevation: 5,
+//         },
+//         tabBarActiveTintColor: '#4CAF50',
+//         tabBarInactiveTintColor: '#999',
+//         tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
+//       }}
+//     >
+//       <Tab.Screen 
+//         name="Dashboard" 
+//         component={DashboardStack} // use the stack here
+//         options={{
+//           tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" color={color} size={size} />
+//         }}
+//       />
+//       <Tab.Screen 
+//         name="Marks" 
+//         component={MarksScreen} 
+//         options={{
+//           tabBarIcon: ({ color, size }) => <Ionicons name="clipboard-outline" color={color} size={size} />
+//         }}
+//       />
+//       <Tab.Screen 
+//         name="Timetable" 
+//         component={TimetableScreen} 
+//         options={{
+//           tabBarIcon: ({ color, size }) => <Ionicons name="calendar-outline" color={color} size={size} />
+//         }}
+//       />
+//       {/* <Tab.Screen 
+//         name="Profile" 
+//         component={ProfileScreen} 
+//         options={{
+//           tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" color={color} size={size} />
+//         }}
+//       /> */}
+//       <Tab.Screen 
+//   name="Profile" 
+//   options={{
+//     tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" color={color} size={size} />
+//   }}
+// >
+//   {props => <ProfileScreen {...props} onLogout={onLogout} />}
+// </Tab.Screen>
+
+//     </Tab.Navigator>
+//   );
+// }
+
+// export default function AppNavigator() {
+//   const [isTeacher, setIsTeacher] = useState(null); // null = loading
+
+//   useEffect(() => {
+//     const loadTeacher = async () => {
+//       const data = await AsyncStorage.getItem('teacher');
+//       setIsTeacher(!!data); // true if teacher exists
+//     };
+//     loadTeacher();
+//   }, []);
+
+//   if (isTeacher === null) return null; // optional splash
+
+//   return (
+//     <Stack.Navigator screenOptions={{ headerShown: false }}>
+//       {isTeacher ? (
+//         <Stack.Screen name="Home" component={AppTabs} />
+//       ) : (
+//         <Stack.Screen name="Login" component={LoginScreen} />
+//       )}
+//     </Stack.Navigator>
+//   );
+// }
+
+
+function AppTabs({ onLogout }) { // ✅ accept prop
   const insets = useSafeAreaInsets();
 
   return (
@@ -58,7 +144,7 @@ function AppTabs() {
     >
       <Tab.Screen 
         name="Dashboard" 
-        component={DashboardStack} // use the stack here
+        component={DashboardStack} 
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" color={color} size={size} />
         }}
@@ -79,34 +165,41 @@ function AppTabs() {
       />
       <Tab.Screen 
         name="Profile" 
-        component={ProfileScreen} 
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" color={color} size={size} />
         }}
-      />
+      >
+        {props => <ProfileScreen {...props} onLogout={onLogout} />}
+      </Tab.Screen>
     </Tab.Navigator>
   );
 }
 
 export default function AppNavigator() {
   const [isTeacher, setIsTeacher] = useState(null); // null = loading
+  const [refresh, setRefresh] = useState(false); // new state to force re-render
 
   useEffect(() => {
     const loadTeacher = async () => {
       const data = await AsyncStorage.getItem('teacher');
-      setIsTeacher(!!data); // true if teacher exists
+      setIsTeacher(!!data);
     };
     loadTeacher();
-  }, []);
+  }, [refresh]); // re-run when refresh changes
 
   if (isTeacher === null) return null; // optional splash
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isTeacher ? (
-        <Stack.Screen name="Home" component={AppTabs} />
+       <Stack.Screen name="Home">
+  {props => <AppTabs {...props} onLogout={() => setRefresh(!refresh)} />}
+</Stack.Screen>
+
       ) : (
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Login">
+          {props => <LoginScreen {...props} onLogin={() => setRefresh(!refresh)} />}
+        </Stack.Screen>
       )}
     </Stack.Navigator>
   );

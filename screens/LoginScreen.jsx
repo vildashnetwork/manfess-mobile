@@ -7,13 +7,16 @@ import {
   StyleSheet, 
   Alert, 
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 import { DevSettings } from 'react-native';
 
-export default function LoginScreen({ navigation }) {
+
+export default function LoginScreen({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -35,7 +38,7 @@ export default function LoginScreen({ navigation }) {
 
       if (res.status === 200 && res.data.user) {
         await AsyncStorage.setItem('teacher', JSON.stringify(res.data.user));
-      DevSettings.reload();
+        if (onLogin) onLogin();
       } else {
         Alert.alert('Error', res.data.error || 'Login failed');
       }
@@ -48,10 +51,11 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
     <View style={styles.container}>
       <View style={styles.card}>
         <Image 
-          source={require('../assets/public.jpg')} 
+          source={require('../assets/logo.png')} 
           style={styles.image} 
         />
         <Text style={styles.title}>Teacher Login</Text>
@@ -69,7 +73,7 @@ export default function LoginScreen({ navigation }) {
           placeholder="Password"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+        
         />
 
         <TouchableOpacity 
@@ -87,6 +91,7 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.footerText}>MANFESS STAFF</Text>
       </View>
     </View>
+      </KeyboardAvoidingView>
   );
 }
 
@@ -130,6 +135,7 @@ const styles = StyleSheet.create({
     borderColor:'#ccc',
     borderRadius:10, 
     marginVertical:8, 
+    color: "#333",
     backgroundColor:'#fafafa' 
   },
   button: { 

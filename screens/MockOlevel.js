@@ -261,7 +261,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
 import NetInfo from "@react-native-community/netinfo";
-import { DevSettings } from "react-native";
 export default function MockOlevelDebug() {
   const [marks, setMarks] = useState({});
   const [grades, setGrades] = useState({});
@@ -464,7 +463,6 @@ export default function MockOlevelDebug() {
       await AsyncStorage.setItem(KEY_RESULTS, JSON.stringify(history));
       await AsyncStorage.setItem(KEY_MARKS, JSON.stringify(marks));
       Alert.alert("Saved Offline", `Saved ${newRecords.length} records locally.`);
-       DevSettings.reload()
     } catch (err) {
       console.error("save offline error", err);
       Alert.alert("Error", "Failed to save results locally.");
@@ -487,7 +485,6 @@ export default function MockOlevelDebug() {
       await AsyncStorage.removeItem(KEY_MARKS);
       setMarks({}); setGrades({});
       safeSetProgress(100);
-       DevSettings.reload()
     } catch (err) {
       const info = extractAxiosErrorInfo(err);
       console.error("push failed:", info);
@@ -518,11 +515,12 @@ export default function MockOlevelDebug() {
       </View>
       <Text style={{ marginTop: 8, fontWeight: "700" }}>Last error</Text>
       <Text style={{ color: "#b71c1c" }}>{lastError ?? "(none)"}</Text>
-      <Text style={{ marginTop: 8, fontWeight: "700" }}>Raw preview</Text>
-      <Text selectable numberOfLines={6}>{rawResponsePreview ? JSON.stringify(rawResponsePreview, null, 2) : "(none)"}</Text>
+   
     </View>
   );
-
+  //  <Text style={{ marginTop: 8, fontWeight: "700" }}>Raw preview</Text>
+  //     <Text selectable numberOfLines={6}>{rawResponsePreview ? JSON.stringify(rawResponsePreview, null, 2) : "(none)"}</Text>
+   
   return (
     <KeyboardAvoidingView style={{ flex:1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
@@ -590,11 +588,11 @@ const styles = StyleSheet.create({
   pickerBox: { backgroundColor: "#fff", padding: 12, borderRadius: 8, marginBottom: 12 },
   label: { fontWeight: "700", marginBottom: 6 },
   pickerWrap: { borderWidth: 1, borderColor: "#ddd", borderRadius: 8, overflow: "hidden" },
-  picker: { height: 44 },
+  picker: { height: 56 },
   title: { fontWeight: "700", marginVertical: 10 },
   studentRow: { flexDirection: "row", alignItems: "center", backgroundColor: "#fff", padding: 10, borderRadius: 8, marginBottom: 8 },
   studentName: { flex: 1, fontWeight: "600" },
-  input: { width: 90, borderWidth: 1, borderColor: "#ddd", padding: 8, borderRadius: 6, textAlign: "center", marginRight: 8 },
+  input: { width: 90, borderWidth: 1, borderColor: "#ddd",color: "#333", padding: 8, borderRadius: 6, textAlign: "center", marginRight: 8 },
   grade: { width: 56, textAlign: "center", fontWeight: "700", color: "#2e7d32" },
   btn: { padding: 12, borderRadius: 10, marginTop: 10 },
   btnText: { color: "#fff", fontWeight: "700", textAlign: "center" },

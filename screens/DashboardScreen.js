@@ -16,6 +16,7 @@ import {
   TextInput,
   Modal,
   ActivityIndicator,
+  Linking
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Animatable from 'react-native-animatable';
@@ -34,6 +35,12 @@ const KEY_PREFIXES = [
   "activity",
   "activities",
 ];
+  const openWebsite = () => {
+    const url = "https://doc-teacher.vercel.app/"; // your link
+    Linking.openURL(url).catch((err) =>
+      console.error("Failed to open URL:", err)
+    );
+  };
 
 const guessDateFrom = (item) => {
   if (!item) return null;
@@ -101,12 +108,64 @@ const timeAgo = (date) => {
 };
 
 export default function DashboardScreen({ navigation }) {
+
   // recent activities state
   const [activities, setActivities] = useState([]);
   const [loadingActivities, setLoadingActivities] = useState(true);
-  
+    //  const loadResults = async () => {
+    //   try {
+    //     const stored = await AsyncStorage.getItem("offline_results_history_olevel");
+    //     if (stored) setSavedResults(JSON.parse(stored));
+
+    //     const std = await AsyncStorage.getItem('offline_students_olevel');
+    //     if (std) setlocalStudents(JSON.parse(std));
+
+    //     const stda = await AsyncStorage.getItem('offline_students_alevel');
+    //     if (stda) setlocalSubjects(JSON.parse(stda));
+
+    //     const saved = await AsyncStorage.getItem('offline_results_history_alevel');
+    //     if (saved) setal(JSON.parse(saved));
+
+    //     const storedAlevel = await AsyncStorage.getItem("offline_results_premock");
+    //     if (storedAlevel) setol(JSON.parse(storedAlevel));
+
+    //     const storedOlevel = await AsyncStorage.getItem("offline_results_alevel_premock");
+    //     if (storedOlevel) setjk(JSON.parse(storedOlevel));
+    //   } catch (err) {
+    //     console.error("Error loading results:", err);
+    //   }
+    // };
  
   // load recent activities from AsyncStorage
+  const [loadingResults, setLoadingResults] = useState(false);
+
+const loadResults = async () => {
+  setLoadingResults(true);
+  try {
+    const keys = [
+      "offline_results_history_olevel",
+      "offline_students_olevel",
+      "offline_students_alevel",
+      "offline_results_history_alevel",
+      "offline_results_premock",
+      "offline_results_alevel_premock"
+    ];
+
+    const results = await Promise.all(keys.map(k => AsyncStorage.getItem(k)));
+    
+    setSavedResults(results[0] ? JSON.parse(results[0]) : []);
+    setlocalStudents(results[1] ? JSON.parse(results[1]) : []);
+    setlocalSubjects(results[2] ? JSON.parse(results[2]) : []);
+    setal(results[3] ? JSON.parse(results[3]) : []);
+    setol(results[4] ? JSON.parse(results[4]) : []);
+    setjk(results[5] ? JSON.parse(results[5]) : []);
+  } catch (err) {
+    console.error("Error loading results:", err);
+  } finally {
+    setLoadingResults(false);
+  }
+};
+
   const loadFromStorage = useCallback(async () => {
     setLoadingActivities(true);
     try {
@@ -190,29 +249,7 @@ export default function DashboardScreen({ navigation }) {
   const [jk, setjk] = useState([]);
 
   useEffect(() => {
-    const loadResults = async () => {
-      try {
-        const stored = await AsyncStorage.getItem("offline_results_history_olevel");
-        if (stored) setSavedResults(JSON.parse(stored));
-
-        const std = await AsyncStorage.getItem('offline_students_olevel');
-        if (std) setlocalStudents(JSON.parse(std));
-
-        const stda = await AsyncStorage.getItem('offline_students_alevel');
-        if (stda) setlocalSubjects(JSON.parse(stda));
-
-        const saved = await AsyncStorage.getItem('offline_results_history_alevel');
-        if (saved) setal(JSON.parse(saved));
-
-        const storedAlevel = await AsyncStorage.getItem("offline_results_premock");
-        if (storedAlevel) setol(JSON.parse(storedAlevel));
-
-        const storedOlevel = await AsyncStorage.getItem("offline_results_alevel_premock");
-        if (storedOlevel) setjk(JSON.parse(storedOlevel));
-      } catch (err) {
-        console.error("Error loading results:", err);
-      }
-    };
+ 
     loadResults();
   }, []);
 
@@ -333,7 +370,14 @@ export default function DashboardScreen({ navigation }) {
 
         <Animatable.View animation="fadeInUp" duration={800} delay={400} style={styles.quickStatsSection}>
           <Text style={styles.sectionTitle}>Quick Stats</Text>
+        <TouchableOpacity onPress={loadResults} style={{ marginRight: 12, marginBottom: 20 }}>
+  <Text style={{ color: '#1e88e5', fontWeight: '600' }}>
+    {loadingResults ? 'Refreshing...' : 'Refresh'}
+  </Text>
+</TouchableOpacity>
+
           <View style={styles.statsContainer}>
+             
             {quickStatsData.map((stat, idx) => (
               <Animatable.View key={idx} animation="zoomIn" duration={600} delay={idx * 100} style={[styles.statCard, { backgroundColor: stat.color }]}>
                 <Text style={styles.statValue}>{stat.value}</Text>
@@ -397,7 +441,12 @@ export default function DashboardScreen({ navigation }) {
         <Animatable.View animation="fadeInUp" duration={800} delay={1000} style={styles.footerSection}>
           <Text style={styles.footerText}>© {new Date().getFullYear()} MANFESS School System</Text>
           <Text style={styles.footerSubText}>Version 2.0.1 | Designed for Excellence</Text>
-      
+            <TouchableOpacity
+        onPress={openWebsite} >
+        <Text style={{ color: "#0d47a1", fontWeight: "bold", fontSize: 16 }}>
+          open the user manual
+        </Text>
+      </TouchableOpacity>
         </Animatable.View>
       </ScrollView>
 

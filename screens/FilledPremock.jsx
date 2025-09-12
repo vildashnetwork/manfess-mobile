@@ -12,9 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function FilledPremock() {
   const [historyOlevel, setHistoryOlevel] = useState([]);
   const [historyAlevel, setHistoryAlevel] = useState([]);
-
-  useEffect(() => {
-    const loadHistory = async () => {
+ const loadHistory = async () => {
       try {
         const storedOlevel = await AsyncStorage.getItem("offline_results_history_alevel_premock");
         if (storedOlevel) setHistoryOlevel(JSON.parse(storedOlevel));
@@ -26,6 +24,8 @@ export default function FilledPremock() {
         Alert.alert("Error", "Failed to load history.");
       }
     };
+  useEffect(() => {
+   
     loadHistory();
   }, []);
 
@@ -90,6 +90,9 @@ export default function FilledPremock() {
       <TouchableOpacity style={styles.clearButton} onPress={() => clearHistory(levelKey)}>
         <Text style={styles.clearText}>🗑️ Clear History</Text>
       </TouchableOpacity>
+          <TouchableOpacity style={styles.cleaButton} onPress={loadHistory}>
+              <Text style={styles.clearText}>REFRESH HISTORY</Text>
+            </TouchableOpacity>
     </View>
   );
 
@@ -110,5 +113,6 @@ const styles = StyleSheet.create({
   cell: { fontSize: 14, textAlign: "center", paddingHorizontal: 6 },
   headerText: { color: "#fff", fontWeight: "bold" },
   clearButton: { backgroundColor: "#FF3B30", padding: 12, borderRadius: 8, marginTop: 20 },
+   cleaButton: { backgroundColor: "#1a850cff", padding: 12, borderRadius: 8, marginTop: 20 },
   clearText: { color: "#fff", textAlign: "center", fontWeight: "bold" }
 });
