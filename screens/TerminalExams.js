@@ -94,7 +94,7 @@ const renderHeader = () => (
 const renderRow = (item, index) => {
   const savedAt = item.savedAt || item.Datepushed || item.saved_on || item.savedOn;
   return (
-    <View key={index} style={[styles.row, { backgroundColor: index % 2 === 0 ? "#f9f9f9" : "#fff" }]}>
+    <View key={index} style={[styles.row, { backgroundColor: index % 2 === 0 ? "#352f2fff" : "#443535ff" }]}>
       <Text style={[styles.cell, { minWidth: 140 }]}>{item.studentname ?? `${item.FirstName ?? ""} ${item.LastName ?? ""}`}</Text>
       <Text style={[styles.cell, { minWidth: 80 }]}>{item.Class ?? item.level ?? "N/A"}</Text>
       <Text style={[styles.cell, { minWidth: 120 }]}>{item.Subject ?? item.subject ?? item.subjectTitle ?? "N/A"}</Text>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   row: { flexDirection: "row", borderBottomWidth: 1, borderBottomColor: "#ddd", paddingVertical: 10, alignItems: "center" },
   headerRow: { backgroundColor: "#007BFF" },
   cell: { fontSize: 14, textAlign: "center", paddingHorizontal: 6 },
-  headerText: { color: "#fff", fontWeight: "bold" },
+  headerText: { color: "#1d1919ff", fontWeight: "bold" },
   clearButton: { backgroundColor: "#FF3B30", padding: 12, borderRadius: 8, marginTop: 20, alignItems: "center" },
-  clearText: { color: "#fff", textAlign: "center", fontWeight: "bold" }
+  clearText: { color: "#2b2525ff", textAlign: "center", fontWeight: "bold" }
 });

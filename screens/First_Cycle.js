@@ -69,7 +69,7 @@ export default function First_Cycle() {
     try {
       let all = [];
       if (online) {
-        const res = await axios.get(`${BASE}/api/students/all`);
+        const res = await axios.get(`${BASE}/api/students/all/students`);
         if (res?.data) {
           all = res.data;
           // replace old cache completely
@@ -277,7 +277,7 @@ const handleSaveOnline = async () => {
           Subject: rec.Subject,
           Subject_Code: rec.Subject_Code,
           Mark: rec.Mark,
-          Sequence: rec.Sequence,
+          sequence: rec.Sequence,
         }));
 
         await axios.post(`${BASE}/api/terminalresults`, payload);
