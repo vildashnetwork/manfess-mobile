@@ -136,11 +136,12 @@ onPress={openWebsite}
             {/* Header */}
             <View style={[styles.row, styles.headerRow]}>
               <Text style={[styles.cell, styles.headerCell]}>Day</Text>
-              <Text style={[styles.cell, styles.headerCell]}>04:30-05:20</Text>
-              <Text style={[styles.cell, styles.headerCell]}>05:20-06:10</Text>
-              <Text style={[styles.cell, styles.headerCell]}>06:10-07:00</Text>
-              <Text style={[styles.cell, styles.headerCell]}>07:00-07:50</Text>
-              <Text style={[styles.cell, styles.headerCell]}>07:50-09:00</Text>
+              <Text style={[styles.cell, styles.headerCell]}>04:30-05:15</Text>
+              <Text style={[styles.cell, styles.headerCell]}>05:15-06:00</Text>
+              <Text style={[styles.cell, styles.headerCell]}>06:00-06:45</Text>
+              <Text style={[styles.cell, styles.headerCell]}>06:45-07:30</Text>
+              <Text style={[styles.cell, styles.headerCell]}>07:30-08:15</Text>
+                  <Text style={[styles.cell, styles.headerCell]}>08:15-09:00</Text>
             </View>
 
             {/* Body */}
@@ -148,11 +149,12 @@ onPress={openWebsite}
               timetable.map((item, index) => (
                 <View key={index} style={styles.row}>
                   <Text style={[styles.cell, styles.dayCell]}>{item.Day}</Text>
-                  <Text style={styles.cell}>{item["04:30-05:20"] || "Free"}</Text>
-                  <Text style={styles.cell}>{item["05:20-06:10"] || "Free"}</Text>
-                  <Text style={styles.cell}>{item["06:10-07:00"] || "Free"}</Text>
-                  <Text style={styles.cell}>{item["07:00-07-50"] || "Free"}</Text>
-                  <Text style={styles.cell}>{item["07-50-09-00"] || "Free"}</Text>
+                  <Text style={styles.cell}>{item["04:30-05:15"] || "Free"}</Text>
+                  <Text style={styles.cell}>{item["05:15-06:00"] || "Free"}</Text>
+                  <Text style={styles.cell}>{item["06:00-06:45"] || "Free"}</Text>
+                  <Text style={styles.cell}>{item["06:45-07:30"] || "Free"}</Text>
+                  <Text style={styles.cell}>{item["07:30-08:15"] || "Free"}</Text>
+                  <Text style={styles.cell}>{item["08:15-09:00"] || "Free"}</Text>
                 </View>
               ))
             ) : (

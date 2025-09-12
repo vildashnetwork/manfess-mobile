@@ -316,7 +316,7 @@ const handleSaveOnline = async () => {
           <Text style={styles.label}>Select Class</Text>
           <View style={styles.pickerWrapper}>
             <Picker selectedValue={selectedClass} onValueChange={(v) => setSelectedClass(v)} style={styles.picker}>
-              <Picker.Item label="-- All Classes --" value="" />
+              <Picker.Item label="-- All Classes --" value="" style={{color: "#333"}} />
               {allClasses.map((cls, idx) => <Picker.Item key={idx} label={cls} value={cls} />)}
             </Picker>
           </View>
@@ -327,7 +327,7 @@ const handleSaveOnline = async () => {
           <Text style={styles.label}>Select Department</Text>
           <View style={styles.pickerWrapper}>
             <Picker selectedValue={selectedDepartment} onValueChange={(v) => setSelectedDepartment(v)} style={styles.picker}>
-              <Picker.Item label="-- All Departments --" value="" />
+              <Picker.Item label="-- All Departments --" value="" style={{color: "#333"}}/>
               {allDepartments.map((dep, idx) => <Picker.Item key={idx} label={dep} value={dep} />)}
             </Picker>
           </View>
@@ -338,7 +338,7 @@ const handleSaveOnline = async () => {
           <Text style={styles.label}>Select Subject</Text>
           <View style={styles.pickerWrapper}>
             <Picker selectedValue={selectedSubjectCode} onValueChange={(v) => setSelectedSubjectCode(v)} style={styles.picker}>
-              <Picker.Item label="-- Select Subject --" value="" />
+              <Picker.Item label="-- Select Subject --" value="" style={{color: "#333"}}/>
               {filteredSubjects.map(sub => (
                 <Picker.Item key={String(sub.subjectCode)} label={sub.subjectTitle} value={String(sub.subjectCode)} />
               ))}
@@ -353,13 +353,13 @@ const handleSaveOnline = async () => {
             onValueChange={(v) => setSelectedSequence(v)}
             style={styles.picker}
           >
-            <Picker.Item label="-- Select Sequence --" value="" />
-            <Picker.Item label="First Sequence" value="First Sequence" />
-            <Picker.Item label="Second Sequence" value="Second Sequence" />
-            <Picker.Item label="Third Sequence" value="Third Sequence" />
-            <Picker.Item label="Fourth Sequence" value="Fourth Sequence" />
-            <Picker.Item label="Fifth Sequence" value="Fifth Sequence" />
-            <Picker.Item label="Sixth Sequence" value="Sixth Sequence" />
+            <Picker.Item label="-- Select Sequence --" value="" style={{color: "#333"}}/>
+            <Picker.Item label="First Sequence" value="First Sequence" style={{color: "#333"}}/>
+            <Picker.Item label="Second Sequence" value="Second Sequence" style={{color: "#333"}}/>
+            <Picker.Item label="Third Sequence" value="Third Sequence" style={{color: "#333"}}/>
+            <Picker.Item label="Fourth Sequence" value="Fourth Sequence" style={{color: "#333"}}/>
+            <Picker.Item label="Fifth Sequence" value="Fifth Sequence" style={{color: "#333"}}/>
+            <Picker.Item label="Sixth Sequence" value="Sixth Sequence" style={{color: "#333"}}/>
           
           </Picker>
         </View>
@@ -405,11 +405,11 @@ const styles = StyleSheet.create({
   pickerContainer: { marginVertical: 12, padding: 12, backgroundColor: '#fff', borderRadius: 12, elevation: 3 },
   label: { fontSize: 14, fontWeight: '600', marginBottom: 6, color: '#333' },
   pickerWrapper: { borderWidth: 1, borderColor: '#ddd', borderRadius: 8, overflow: 'hidden' },
-  picker: { height: 56, width: '100%' },
+  picker: { height: 56, width: '100%', color: "#333" },
   title: { fontSize: 20, fontWeight: '700', marginBottom: 12 },
   studentRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12, backgroundColor: '#fff', padding: 12, borderRadius: 10, elevation: 2 },
   studentName: { flex: 1, fontSize: 15, fontWeight: '600' },
-  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ccc',color: "#333", borderRadius: 8, marginRight: 8, textAlign: 'center' },
+  input: { width: 90, padding: 8, borderWidth: 1, borderColor: '#ccc', color: "#333", borderRadius: 8, marginRight: 8, textAlign: 'center' },
   gradeText: { width: 48, textAlign: 'center', fontWeight: '700', color: '#4CAF50' },
   button: { padding: 12, borderRadius: 10, marginTop: 10 },
   buttonText: { color: '#fff', fontWeight: '700', textAlign: 'center' }

@@ -229,3 +229,4 @@ Avoid force pushes unless necessary.
 Use developing for ongoing development and main for stable code.
 
 Keep commit messages clear and descriptive.
+npx expo start --android

@@ -8,12 +8,13 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "backgroundColor": "#28a745",
+      "image": "./assets/logo.png",
       "resizeMode": "cover",
-      "image": "./assets/logo.png"
+      "backgroundColor": "#28a745"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.orsablissz.manfessmobile"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,14 +22,14 @@
         "backgroundColor": "#28a745"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.liblissz.manfessmobile"
+      "package": "com.orsablissz.manfessmobile"
     },
     "web": {
-      "favicon": "./assets/public.jpg"
+      "favicon": "./assets/logo.png"
     },
     "extra": {
       "eas": {
-        "projectId": "0949f3b4-88ac-459d-94cb-48aa11962952"
+        "projectId": "29180fb0-e51f-4671-85bc-89715b42ec41"
       }
     }
   }

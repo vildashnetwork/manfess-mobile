@@ -588,7 +588,7 @@ const styles = StyleSheet.create({
   pickerBox: { backgroundColor: "#fff", padding: 12, borderRadius: 8, marginBottom: 12 },
   label: { fontWeight: "700", marginBottom: 6 },
   pickerWrap: { borderWidth: 1, borderColor: "#ddd", borderRadius: 8, overflow: "hidden" },
-  picker: { height: 56 },
+  picker: { height: 56 , color: '#333' },
   title: { fontWeight: "700", marginVertical: 10 },
   studentRow: { flexDirection: "row", alignItems: "center", backgroundColor: "#fff", padding: 10, borderRadius: 8, marginBottom: 8 },
   studentName: { flex: 1, fontWeight: "600" },
